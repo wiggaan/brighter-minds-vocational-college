@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMTVC - Brighter Minds College</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+      background-size: 800% 800%;
+      animation: gradientShift 18s ease infinite;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+    nav h2 {
+      color: #fff;
+      font-size: 1.4rem;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav ul li a:hover {
+      color: #ffd700;
+    }
+
+    /* Hero Section */
+    header {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      animation: flyIn 1.5s ease-out;
+    }
+    header p {
+      font-size: 1.2rem;
+      animation: flyIn 2s ease-out;
+    }
+
+    /* Sections */
+    section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #222;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    /* Courses in cards */
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Form */
+    form {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 600px;
+      margin: auto;
+    }
+    form label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    form button {
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.5rem;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    form button:hover {
+      background: #444;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @keyframes flyIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Chatbot styles */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #222;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .chatbot-box {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      height: 420px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      flex-direction: column;
+    }
+    .chatbot-header {
+      background: #222;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    .chatbot-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    .chatbot-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    .chatbot-input input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+    }
+    .chatbot-input button {
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <h2>BMTVC</h2>
+    <ul>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#admission">Admission</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header>
+    <h1>BRIGHTER MINDS TECHNICAL & VOCATIONAL COLLEGE (BMTVC)</h1>
+    <p>TVETA REGISTERED • Empowering Skills for the Future</p>
+  </header>
+
+  <!-- Courses -->
+  <section id="courses">
+    <h2>Courses Offered</h2>
+    <div class="courses">
+      <div class="card">Hospitality & Management</div>
+      <div class="card">Baking Technology</div>
+      <div class="card">Nutrition</div>
+      <div class="card">Barista</div>
+      <div class="card">Computer Training</div>
+      <div class="card">Care Giver</div>
+      <div class="card">Hair & Beauty</div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why">
+    <h2>Why Join Us?</h2>
+    <ul>
+      <li>Registered & recognized by the Ministry of Education</li>
+      <li>Accredited by TVET</li>
+      <li>Partnership with NITA</li>
+      <li>Affordable fees with installment plans</li>
+      <li>Well-equipped computer lab & library</li>
+      <li>Qualified & professional trainers</li>
+    </ul>
+  </section>
+
+  <!-- Admission -->
+  <section id="admission">
+    <h2>Admission Form</h2>
+    <form>
+      <label>Full Name:</label>
+      <input type="text" required>
+
+      <label>Email:</label>
+      <input type="email" required>
+
+      <label>Phone:</label>
+      <input type="text" required>
+
+      <label>Course of Interest:</label>
+      <select>
+        <option>Hospitality & Management</option>
+        <option>Baking Technology</option>
+        <option>Nutrition</option>
+        <option>Barista</option>
+        <option>Computer Training</option>
+        <option>Care Giver</option>
+        <option>Hair & Beauty</option>
+      </select>
+
+      <label>Message (Optional):</label>
+      <textarea rows="4"></textarea>
+
+      <button type="submit">Submit Application</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>📧 brightermindsvocational@gmail.com | ☎️ +254 726 301 589 / 740 889 709</p>
+    <p>Main Branch: Banana, Kiambu • Branch: Kayole, Nairobi</p>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/254726301589" target="_blank">
+    <button class="whatsapp-btn"><i class="fab fa-whatsapp"></i></button>
+  </a>
+
+  <!-- Chatbot -->
+  <button class="chatbot-btn" onclick="toggleChat()"><i class="fas fa-robot"></i></button>
+  <div class="chatbot-box" id="chatbot">
+    <div class="chatbot-header">BMTVC Assistant</div>
+    <div class="chatbot-messages" id="chatMessages">
+      <p><b>Bot:</b> Hello! 👋 How can I assist you today?</p>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const chat = document.getElementById("chatbot");
+      chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+      if(chat.style.display === "flex"){ chat.style.display = "flex"; chat.style.flexDirection = "column"; }
+    }
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const messages = document.getElementById("chatMessages");
+      if(input.value.trim() !== "") {
+        const userMsg = document.createElement("p");
+        userMsg.innerHTML = "<b>You:</b> " + input.value;
+        messages.appendChild(userMsg);
+
+        const botMsg = document.createElement("p");
+        botMsg.innerHTML = "<b>Bot:</b> Thanks for reaching out. Our team will contact you soon!";
+        messages.appendChild(botMsg);
+
+        input.value = "";
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+  </script>
+</body>
+</html>
